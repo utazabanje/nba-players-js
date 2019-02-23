@@ -1,7 +1,8 @@
 ## nba-players-js
 
 This is a small exercise for fetching api, and doing everything in vanilla JavaScript.
-Plan:
+
+**Plan:**
 ```
 fetch nba api from json file
 show the list of 10 random players on screen
