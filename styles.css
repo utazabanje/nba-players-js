@@ -13,10 +13,11 @@
     text-align: center;
 }
 
-#singlePlayerGrid .col-6 {
+#singlePlayerGrid .col-6, #startingFive .col-12 {
     border: 1px solid #e8e8e8;
     box-sizing: border-box;
     padding: 20px;
+    position: relative;
 }
 
 #singlePlayerGrid .col-6:hover {
@@ -28,4 +29,11 @@
 
 .game-time {
     text-align: center;
+}
+
+#startingFive .btn.btn-primary {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }

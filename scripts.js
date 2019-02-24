@@ -67,6 +67,16 @@ function startingFiveGrid(singlePlayer, index) {
     startingFiveHtml.classList.add('col-12', 'index-' + (index + 1));
     startingFiveHtml.querySelector('.player-name').innerHTML = singlePlayer.firstName + ' ' + singlePlayer.lastName;
 
+    let shootButton = document.createElement('button');
+    shootButton.classList.add('btn', 'btn-primary');
+    shootButton.innerHTML = 'shoot';
+
+    startingFiveHtml.appendChild(shootButton);
+
+    startingFiveHtml.querySelector('.btn-primary').onclick = () => {
+        shootBasket();
+    }
+
     document.getElementById('startingFive').appendChild(startingFiveHtml);
 }
 
@@ -83,6 +93,7 @@ function startingFive(singlePlayer) {
     });
 }
 
+// remove player using splice method
 function removePlayer(singlePlayer) {
     firstFive.splice(firstFive.indexOf(singlePlayer), 1);
 
@@ -93,4 +104,9 @@ function removePlayer(singlePlayer) {
     firstFive.forEach((element, index) => {
         startingFiveGrid(element, index);
     });
+}
+
+// give players ability to shoot
+function shootBasket() {
+    console.log('shot was made');
 }
