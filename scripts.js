@@ -2,6 +2,7 @@ let url = "http://www.json-generator.com/api/json/get/cfmbOlMLGW?indent=2";
 let allPlayersArray = [];
 let playerIndex = [];
 let firstFive = [];
+let scorePoints = null;
 
 (function() {
     fetch(url)
@@ -17,7 +18,7 @@ let firstFive = [];
             //create 10 players with createPlayer function. Argument is single array 
             for(let i = 0; i < 10; i++) {
                 randomPlayerSplice[i];
-                // console.log(randomPlayerSplice[i]);
+                console.log(randomPlayerSplice[i]);
 
                 createPlayer(randomPlayerSplice[i]);
             }
@@ -74,7 +75,7 @@ function startingFiveGrid(singlePlayer, index) {
     startingFiveHtml.appendChild(shootButton);
 
     startingFiveHtml.querySelector('.btn-primary').onclick = () => {
-        shootBasket();
+        shootBasket(singlePlayer);
     }
 
     document.getElementById('startingFive').appendChild(startingFiveHtml);
@@ -107,6 +108,20 @@ function removePlayer(singlePlayer) {
 }
 
 // give players ability to shoot
-function shootBasket() {
-    console.log('shot was made');
+function shootBasket(playerAbility) {
+    if(playerAbility.nbaDebutYear > 2013) {
+        console.log('you to young to shoot');
+    }
+
+    let shootPosibility = Math.floor(Math.random() * 3);
+    if (shootPosibility === 0) {
+        scorePoints = 0;
+        console.log('you missed', scorePoints);
+    } else if (shootPosibility === 1) {
+        scorePoints = scorePoints + 2;
+        console.log('you scored 2 points', scorePoints);
+    } else {
+        scorePoints = scorePoints + 3;
+        console.log('you scored 3 points', scorePoints);
+    }
 }
