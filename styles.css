@@ -37,3 +37,14 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.computerRow .btn.btn-warning {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.computerRow .title {
+    margin-right: 35px;
+}

@@ -1,22 +1,25 @@
 let url = "http://www.json-generator.com/api/json/get/cfmbOlMLGW?indent=2";
 let allPlayersArray = [];
-let playerIndex = [];
+let randomPlayerIndex = [];
+let randomPlayerSplice = [];
 let firstFive = [];
+let computerFive = [];
 let scorePoints = null;
+let computerScorePoints = null;
 
-(function() {
+(function () {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
             allPlayersArray = data.league.standard;
 
             //get one random player
-            let randomPlayerIndex = Math.floor(allPlayersArray.length * Math.random());
+            randomPlayerIndex = Math.floor(allPlayersArray.length * Math.random());
             // get 10 random players from allplayers array with splice method
-            let randomPlayerSplice = allPlayersArray.splice(randomPlayerIndex, 10);
+            randomPlayerSplice = allPlayersArray.splice(randomPlayerIndex, 10);
 
             //create 10 players with createPlayer function. Argument is single array 
-            for(let i = 0; i < 10; i++) {
+            for (let i = 0; i < 10; i++) {
                 randomPlayerSplice[i];
                 console.log(randomPlayerSplice[i]);
 
@@ -44,13 +47,13 @@ function createPlayer(singlePlayer) {
 
     // select player on every click
     playerHtml.querySelector('.btn').onclick = () => {
-        if(playerHtml.classList.contains('selected')) {
+        if (playerHtml.classList.contains('selected')) {
             playerHtml.classList.remove('selected');
 
             removePlayer(singlePlayer);
         } else {
             // if there is more than 5 players stop it
-            if(firstFive.length === 5) {
+            if (firstFive.length === 5) {
                 return;
             }
             playerHtml.classList.add('selected');
@@ -94,6 +97,18 @@ function startingFive(singlePlayer) {
     });
 }
 
+//function that selects players that are not selected for starting five
+// function computerFivePlayers(singlePlayer) {
+//     computerFive.push(singlePlayer);
+
+//     document.getElementById('computerFive').innerHTML = '';
+
+//     computerFive.forEach((element, index) => {
+//         startingFiveGrid(element, index);
+//     });
+//     console.log(computerFive);
+// }
+
 // remove player using splice method
 function removePlayer(singlePlayer) {
     firstFive.splice(firstFive.indexOf(singlePlayer), 1);
@@ -109,13 +124,13 @@ function removePlayer(singlePlayer) {
 
 // give players ability to shoot
 function shootBasket(playerAbility) {
-    if(playerAbility.nbaDebutYear > 2013) {
+    if (playerAbility.nbaDebutYear > 2013) {
         console.log('you to young to shoot');
     }
 
     let shootPosibility = Math.floor(Math.random() * 3);
     if (shootPosibility === 0) {
-        scorePoints = 0;
+        scorePoints = scorePoints;
         console.log('you missed', scorePoints);
     } else if (shootPosibility === 1) {
         scorePoints = scorePoints + 2;
