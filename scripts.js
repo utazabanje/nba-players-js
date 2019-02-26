@@ -4,8 +4,8 @@ let randomPlayerIndex = [];
 let randomPlayerSplice = [];
 let firstFive = [];
 let computerFive = [];
-let scorePoints = null;
-let computerScorePoints = null;
+let scorePoints = 0;
+let computerScorePoints = 0;
 
 (function () {
     fetch(url)
@@ -21,20 +21,38 @@ let computerScorePoints = null;
             //create 10 players with createPlayer function. Argument is single array 
             for (let i = 0; i < 10; i++) {
                 randomPlayerSplice[i];
-                console.log(randomPlayerSplice[i]);
+                // console.log(randomPlayerSplice[i]);
 
-                createPlayer(randomPlayerSplice[i]);
+                createPlayer(randomPlayerSplice[i], i);
             }
         })
         .catch((error) => console.log(error));
 })();
 
+document.querySelector('.btn-warning').onclick = () => {
+    let gridOfPlayers = document.querySelectorAll('.unselected');
+    
+    // gridOfPlayers.forEach((onePlayer) => {
+    //     onePlayer.dataset.index;
+    //     console.log(randomPlayerSplice[onePlayer.dataset.index]);
+    //     // let name = onePlayer.innerHTML;
+    //     computerFivePlayers(name);
+    // });
+    
+    gridOfPlayers.forEach((onePlayer) => {
+        let playerObject = randomPlayerSplice[onePlayer.dataset.index];
+
+        computerFivePlayers(playerObject);
+    });
+};
+
 // function that creates single player
-function createPlayer(singlePlayer) {
+function createPlayer(singlePlayer, playerIndex) {
     let playerHtml = document.getElementById('singlePlayer').cloneNode(true);
     playerHtml.removeAttribute('id');
 
-    playerHtml.classList.add('col-6');
+    playerHtml.classList.add('col-6', 'unselected');
+    playerHtml.dataset.index = playerIndex;
     playerHtml.querySelector('.player-name').innerHTML = singlePlayer.firstName + ' ' + singlePlayer.lastName;
 
     let selectPlayerButton = document.createElement('button');
@@ -48,6 +66,7 @@ function createPlayer(singlePlayer) {
     // select player on every click
     playerHtml.querySelector('.btn').onclick = () => {
         if (playerHtml.classList.contains('selected')) {
+            playerHtml.classList.add('unselected');
             playerHtml.classList.remove('selected');
 
             removePlayer(singlePlayer);
@@ -57,6 +76,7 @@ function createPlayer(singlePlayer) {
                 return;
             }
             playerHtml.classList.add('selected');
+            playerHtml.classList.remove('unselected');
             startingFive(singlePlayer);
         }
     }
@@ -64,7 +84,7 @@ function createPlayer(singlePlayer) {
     singlePlayer.htmlObject = playerHtml;
 }
 
-function startingFiveGrid(singlePlayer, index) {
+function startingFiveGrid(singlePlayer, whereToGo, index) {
     let startingFiveHtml = document.getElementById('singlePlayer').cloneNode(true);
     startingFiveHtml.removeAttribute('id');
 
@@ -81,7 +101,7 @@ function startingFiveGrid(singlePlayer, index) {
         shootBasket(singlePlayer);
     }
 
-    document.getElementById('startingFive').appendChild(startingFiveHtml);
+    document.getElementById(whereToGo).appendChild(startingFiveHtml);
 }
 
 // function that creates starting five
@@ -89,25 +109,26 @@ function startingFiveGrid(singlePlayer, index) {
 // and then through forEach we create grid
 function startingFive(singlePlayer) {
     firstFive.push(singlePlayer);
+    console.log(singlePlayer);
 
     document.getElementById('startingFive').innerHTML = '';
 
     firstFive.forEach((element, index) => {
-        startingFiveGrid(element, index);
+        startingFiveGrid(element, 'startingFive', index);
     });
 }
 
 //function that selects players that are not selected for starting five
-// function computerFivePlayers(singlePlayer) {
-//     computerFive.push(singlePlayer);
+function computerFivePlayers(singlePlayer) {
+    computerFive.push(singlePlayer);
 
-//     document.getElementById('computerFive').innerHTML = '';
+    document.getElementById('computerFive').innerHTML = '';
 
-//     computerFive.forEach((element, index) => {
-//         startingFiveGrid(element, index);
-//     });
-//     console.log(computerFive);
-// }
+    computerFive.forEach((element, index) => {
+        startingFiveGrid(element, 'computerFive', index);
+    });
+    console.log(computerFive);
+}
 
 // remove player using splice method
 function removePlayer(singlePlayer) {
