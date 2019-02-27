@@ -95,6 +95,12 @@ function startingFiveGrid(singlePlayer, whereToGo, index) {
     startingFiveHtml.removeAttribute('id');
 
     startingFiveHtml.classList.add('col-12', 'index-' + (index + 1));
+
+    if(whereToGo === 'startingFive') {
+        startingFiveHtml.classList.add('starting-five');
+    } else if (whereToGo === 'computerFive') {
+        startingFiveHtml.classList.add('computer-five');
+    }
     startingFiveHtml.querySelector('.player-name').innerHTML = singlePlayer.firstName + ' ' + singlePlayer.lastName;
 
     let shootButton = document.createElement('button');
@@ -104,10 +110,18 @@ function startingFiveGrid(singlePlayer, whereToGo, index) {
     startingFiveHtml.appendChild(shootButton);
 
     startingFiveHtml.querySelector('.btn-primary').onclick = () => {
-        shootBasket(singlePlayer);
+        if(whereToGo === 'startingFive') {
+            shootBasket('player');
+            updateScore('player');
+        } else if (whereToGo === 'computerFive') {
+            shootBasket('comp');
+            updateScore('comp');
+        }
     }
 
     document.getElementById(whereToGo).appendChild(startingFiveHtml);
+
+    
 }
 
 // function that creates starting five
@@ -150,20 +164,46 @@ function removePlayer(singlePlayer) {
 }
 
 // give players ability to shoot
-function shootBasket(playerAbility) {
-    if (playerAbility.nbaDebutYear > 2013) {
-        console.log('you to young to shoot');
-    }
+function shootBasket(whoIsShooting) {
 
     let shootPosibility = Math.floor(Math.random() * 3);
-    if (shootPosibility === 0) {
-        scorePoints = scorePoints;
-        console.log('you missed', scorePoints);
-    } else if (shootPosibility === 1) {
-        scorePoints = scorePoints + 2;
-        console.log('you scored 2 points', scorePoints);
+
+    if (whoIsShooting === 'player') {
+        if (shootPosibility === 0) {
+            scorePoints = scorePoints;
+            console.log('you missed', scorePoints);
+        } else if (shootPosibility === 1) {
+            scorePoints = scorePoints + 2;
+            console.log('you scored 2 points', scorePoints);
+        } else {
+            scorePoints = scorePoints + 3;
+            console.log('you scored 3 points', scorePoints);
+        } 
+    } else if (whoIsShooting === 'comp') {
+        if (shootPosibility === 0) {
+            computerScorePoints = computerScorePoints;
+            console.log('you missed', computerScorePoints);
+        } else if (shootPosibility === 1) {
+            computerScorePoints = computerScorePoints + 2;
+            console.log('you scored 2 points', computerScorePoints);
+        } else {
+            computerScorePoints = computerScorePoints + 3;
+            console.log('you scored 3 points', computerScorePoints);
+        }
     } else {
-        scorePoints = scorePoints + 3;
-        console.log('you scored 3 points', scorePoints);
+        return;
     }
+    
+}
+
+// update scoreboard for player and comp
+function updateScore(playerVsComp) {
+    if (playerVsComp === 'player') {
+        console.log('updateuj player score');
+    } else if (playerVsComp === 'comp') {
+        console.log('updajtuj za comp')
+    } else {
+        return;
+    }
+    
 }
