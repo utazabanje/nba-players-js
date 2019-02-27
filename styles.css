@@ -13,7 +13,7 @@
     text-align: center;
 }
 
-#singlePlayerGrid .col-6, #startingFive .col-12 {
+#singlePlayerGrid .col-6, #startingFive .col-12, #computerFive .col-12 {
     border: 1px solid #e8e8e8;
     box-sizing: border-box;
     padding: 20px;
@@ -31,7 +31,7 @@
     text-align: center;
 }
 
-#startingFive .btn.btn-primary {
+#startingFive .btn.btn-primary , #computerFive .btn.btn-primary {
     position: absolute;
     right: 20px;
     top: 50%;

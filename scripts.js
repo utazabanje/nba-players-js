@@ -29,6 +29,10 @@ let computerScorePoints = 0;
         .catch((error) => console.log(error));
 })();
 
+
+// get event listener on button for selecting computer five
+// catch unselected players from 10 grid players
+// through forEach find all unselected and their index, put it in variable and pass to computerFivePlayers as argument
 document.querySelector('.btn-warning').onclick = () => {
     let gridOfPlayers = document.querySelectorAll('.unselected');
     
@@ -84,6 +88,8 @@ function createPlayer(singlePlayer, playerIndex) {
     singlePlayer.htmlObject = playerHtml;
 }
 
+// function startingFiveGrid takes three arguments. singlePlayer object
+// whereToGo is where to put five players. in starting five grid or computer five
 function startingFiveGrid(singlePlayer, whereToGo, index) {
     let startingFiveHtml = document.getElementById('singlePlayer').cloneNode(true);
     startingFiveHtml.removeAttribute('id');
