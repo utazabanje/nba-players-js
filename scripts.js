@@ -6,6 +6,9 @@ let firstFive = [];
 let computerFive = [];
 let scorePoints = 0;
 let computerScorePoints = 0;
+let searchPlayers = document.querySelector('.search-players');
+
+searchPlayers.addEventListener('keyup', filterNames);
 
 (function () {
     fetch(url)
@@ -195,4 +198,24 @@ function updateScore(playerVsComp) {
         return;
     }
     
+}
+
+// filter names fuction
+function filterNames() {
+    let filterValue = searchPlayers.value.toUpperCase();
+    let singlePlayerFromGrid = document.getElementById('singlePlayerGrid');
+    let getPlayersNames = singlePlayerFromGrid.querySelectorAll('.player-name');
+    let removeUnselected = document.querySelectorAll('.unselected');
+
+    for(let i = 0; i < getPlayersNames.length; i++) {
+        let names = getPlayersNames[i];
+
+        let textValue = names.textContent || names.innerHTML;
+
+        if(textValue.toUpperCase().indexOf(filterValue) > -1) {
+            removeUnselected[i].style.display = "";
+        } else {
+            removeUnselected[i].style.display = "none";
+        }
+    }
 }
