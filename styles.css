@@ -47,3 +47,32 @@
 .computerRow .title {
     margin-right: 35px;
 }
+
+.starting-row {
+    margin-top: 60px;
+}
+
+.scoreboard {
+    border: 1px solid black;
+    position: relative;
+    max-height: 100px;
+}
+
+.scoreboard div{
+    display: inline-block;
+    font-size: 50px;
+}
+
+.scoreboard .starting-score {
+    left: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.scoreboard .computer-score {
+    right: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

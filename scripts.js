@@ -21,7 +21,6 @@ let computerScorePoints = 0;
             //create 10 players with createPlayer function. Argument is single array 
             for (let i = 0; i < 10; i++) {
                 randomPlayerSplice[i];
-                // console.log(randomPlayerSplice[i]);
 
                 createPlayer(randomPlayerSplice[i], i);
             }
@@ -35,13 +34,6 @@ let computerScorePoints = 0;
 // through forEach find all unselected and their index, put it in variable and pass to computerFivePlayers as argument
 document.querySelector('.btn-warning').onclick = () => {
     let gridOfPlayers = document.querySelectorAll('.unselected');
-    
-    // gridOfPlayers.forEach((onePlayer) => {
-    //     onePlayer.dataset.index;
-    //     console.log(randomPlayerSplice[onePlayer.dataset.index]);
-    //     // let name = onePlayer.innerHTML;
-    //     computerFivePlayers(name);
-    // });
     
     gridOfPlayers.forEach((onePlayer) => {
         let playerObject = randomPlayerSplice[onePlayer.dataset.index];
@@ -112,10 +104,9 @@ function startingFiveGrid(singlePlayer, whereToGo, index) {
     startingFiveHtml.querySelector('.btn-primary').onclick = () => {
         if(whereToGo === 'startingFive') {
             shootBasket('player');
-            updateScore('player');
+            
         } else if (whereToGo === 'computerFive') {
             shootBasket('comp');
-            updateScore('comp');
         }
     }
 
@@ -129,7 +120,6 @@ function startingFiveGrid(singlePlayer, whereToGo, index) {
 // and then through forEach we create grid
 function startingFive(singlePlayer) {
     firstFive.push(singlePlayer);
-    console.log(singlePlayer);
 
     document.getElementById('startingFive').innerHTML = '';
 
@@ -147,7 +137,6 @@ function computerFivePlayers(singlePlayer) {
     computerFive.forEach((element, index) => {
         startingFiveGrid(element, 'computerFive', index);
     });
-    console.log(computerFive);
 }
 
 // remove player using splice method
@@ -171,24 +160,24 @@ function shootBasket(whoIsShooting) {
     if (whoIsShooting === 'player') {
         if (shootPosibility === 0) {
             scorePoints = scorePoints;
-            console.log('you missed', scorePoints);
+            updateScore('player');
         } else if (shootPosibility === 1) {
             scorePoints = scorePoints + 2;
-            console.log('you scored 2 points', scorePoints);
+            updateScore('player');
         } else {
             scorePoints = scorePoints + 3;
-            console.log('you scored 3 points', scorePoints);
+            updateScore('player');
         } 
     } else if (whoIsShooting === 'comp') {
         if (shootPosibility === 0) {
             computerScorePoints = computerScorePoints;
-            console.log('you missed', computerScorePoints);
+            updateScore('comp');
         } else if (shootPosibility === 1) {
             computerScorePoints = computerScorePoints + 2;
-            console.log('you scored 2 points', computerScorePoints);
+            updateScore('comp');
         } else {
             computerScorePoints = computerScorePoints + 3;
-            console.log('you scored 3 points', computerScorePoints);
+            updateScore('comp');
         }
     } else {
         return;
@@ -199,9 +188,9 @@ function shootBasket(whoIsShooting) {
 // update scoreboard for player and comp
 function updateScore(playerVsComp) {
     if (playerVsComp === 'player') {
-        console.log('updateuj player score');
+        document.querySelector('.starting-score').innerHTML = scorePoints;
     } else if (playerVsComp === 'comp') {
-        console.log('updajtuj za comp')
+        document.querySelector('.computer-score').innerHTML = computerScorePoints;
     } else {
         return;
     }
